@@ -3,8 +3,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 
-import postGres from './routes/postGress'
-import googleRoutes from './routes/googleRoutes'
+import postGres from './routes/postGress.js'
+import googleRoutes from './routes/googleRoutes.js'
 
 const app = express()
 
