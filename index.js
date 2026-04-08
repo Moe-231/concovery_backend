@@ -3,6 +3,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const bodyParser = require("body-parser");
 const postGress = require("./routes/postGress")
+const googleRoutes = require("./routes/googleRoutes")
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use("/postgress", postGress)
+app.use("/google", googleRoutes)
 
 const PORT = 8080
 app.listen(PORT, () => {
