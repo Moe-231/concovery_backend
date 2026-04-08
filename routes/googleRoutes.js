@@ -3,6 +3,8 @@ const router = express.Router()
 const corsHandler = cors({origin: true})
 
 router.get("/fetchPredictions", async (req, res) => {
+    console.log("Request made to fetchPredictios Routes")
+    console.log("Query Param Address value is ", req.query.address)
     corsHandler(req, res, async () => {
        const address = req.query.address
        try {
