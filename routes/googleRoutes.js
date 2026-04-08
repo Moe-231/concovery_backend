@@ -1,6 +1,7 @@
-const express = require('express')
-const router = express.Router()
+import express from 'express';
 import cors from 'cors'; 
+
+const router = express.Router()
 const corsHandler = cors({origin: true})
 
 router.get("/fetchPredictions", async (req, res) => {

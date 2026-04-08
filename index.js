@@ -1,7 +1,8 @@
-const cors = require('cors')
-const express = require('express')
-const dotenv = require('dotenv')
-const bodyParser = require("body-parser");
+import cors from 'cors'; 
+import express from 'express'
+import dotenv from 'dotenv'
+import bodyParser from 'body-parser'
+
 const postGress = require("./routes/postGress")
 const googleRoutes = require("./routes/googleRoutes")
 
