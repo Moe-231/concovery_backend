@@ -1,9 +1,7 @@
 import express from 'express';
-import cors from 'cors'; 
 import axios from 'axios';
 
 const router = express.Router()
-const corsHandler = cors({origin: true})
 
 router.get("/fetchPredictions", async (req, res) => {
     console.log("Request made to fetchPredictios Routes")
