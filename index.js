@@ -8,9 +8,8 @@ import googleRoutes from './routes/googleRoutes.js'
 
 const app = express()
 
-dotenv.config()
-
 app.use(cors())
+dotenv.config()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
