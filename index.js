@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
-app.use("/postgress", postGres)
+app.use("/postgres", postGres)
 app.use("/google", googleRoutes)
 
 const PORT = 8080
