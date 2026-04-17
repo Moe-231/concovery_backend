@@ -106,6 +106,45 @@ ORDER BY year_start ASC;
   }
 });
 
+router.get("/sportComparison", async (req, res) => {
+  console.log("Api Req Made to sportComparison Route");
+  try {
+    const query = `
+    SELECT
+    s.sport_id,
+    s.sport_name,
+    s.sport_category,
+    MAX(CASE WHEN cs.measure_type = 'hospitalisation_count' THEN cs.measure_value::numeric END) AS hospitalisation_count,
+    MAX(CASE WHEN cs.measure_type = 'participation_estimate' THEN cs.measure_value::numeric END) AS participation_estimate,
+    MAX(CASE WHEN cs.measure_type = 'rate_per_100000' THEN cs.measure_value::numeric END) AS rate_per_100000
+FROM concussion_statistic cs
+JOIN sport s
+    ON cs.sport_id = s.sport_id
+WHERE cs.statistic_year = '2023-24'
+  AND cs.age_group_id = 7
+  AND cs.sex = 'Persons'
+  AND s.sport_id <> 36
+  AND cs.measure_type IN ('hospitalisation_count', 'participation_estimate', 'rate_per_100000')
+  AND cs.measure_value IS NOT NULL
+  AND cs.measure_value::text <> 'NaN'
+GROUP BY s.sport_id, s.sport_name, s.sport_category
+HAVING COUNT(*) FILTER (WHERE cs.measure_type = 'rate_per_100000') > 0
+   AND COUNT(*) FILTER (WHERE cs.measure_type = 'participation_estimate') > 0
+ORDER BY rate_per_100000 DESC, s.sport_name ASC;
+
+    `
+    const result = await pool.query(query);
+    if (result.rows.length > 0) {
+      res.status(200).json(result.rows);
+    } else {
+      res.status(404).json({ message: "No Data Found" });
+    }
+  } catch (error) {
+    console.log("Error in sportComparison API", error);
+    res.status(500).send("Server Error");
+  }
+});
+
 router.get("/fetchdropdownsdata", async (req, res) => {
   console.log("Api Req Made to testController Route");
   try {
