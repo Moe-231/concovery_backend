@@ -1,11 +1,18 @@
 import express from "express";
 const router = express.Router();
 import pool from "../db.js";
+import { allowedSports } from "../validationData/validationData.js";
+import { allowedAgeGroups } from "../validationData/validationData.js";
 
 router.get("/sportsFilter", async (req, res) => {
   console.log("Api Req Made to sportsFilter Route");
   const sportsType = req.query.sportsType;
   console.log("Sports Type is: ", sportsType)
+  
+  // Validation
+  if (!sportsType || !allowedSports.has(sportsType)) {
+    return res.status(400).json({ message: "Invalid sports type" });
+  }
   try {
     const query = `
         SELECT ag.age_group_label, cs.sex, cs.measure_value 
@@ -33,6 +40,14 @@ router.get("/sportsFilter", async (req, res) => {
 router.get("/ageFilter", async (req, res) => {
   console.log("Api Req Made to ageFilter Route");
   const ageGroup = req.query.ageGroup;
+
+  // Validation
+  if (!ageGroup || !allowedAgeGroups.has(ageGroup)) {
+    return res.status(400).json({
+      message: "Invalid age group provided"
+    });
+  }
+
   try {
     const query = `
     SELECT ag.age_group_label  , cs.sex, cs.measure_value 

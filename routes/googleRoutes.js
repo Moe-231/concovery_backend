@@ -134,7 +134,7 @@ router.get("/nearbyplaces", async (req, res) => {
                 }
     });
     formattedResults.sort((a, b) => a.distance - b.distance)
-    const nearestPlaces = formattedResults.slice(0, 5);
+    const nearestPlaces = formattedResults.slice(0, 20);
     res.status(200).json({
         nearbyplaces: nearestPlaces,
         error: null,
