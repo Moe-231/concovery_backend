@@ -8,7 +8,9 @@ import googleRoutes from './routes/googleRoutes.js'
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: ['https://concovery.netlify.app']
+}))
 dotenv.config()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
