@@ -37,7 +37,7 @@ export const allowedSports = new Set([
   "All sports"
 ]);
 
-const allowedAgeGroups = new Set([
+export const allowedAgeGroups = new Set([
   "0-4",
   "5-14",
   "15-24",
