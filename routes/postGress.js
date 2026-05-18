@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import pool from "../db.js";
-import { allowedSports } from "../validationData/validationData.js";
+import { ageGroupDropdown, allowedSports, sportsDropdown } from "../validationData/validationData.js";
 import { allowedAgeGroups } from "../validationData/validationData.js";
 
 router.get("/sportsFilter", async (req, res) => {
@@ -161,28 +161,31 @@ ORDER BY rate_per_100000 DESC, s.sport_name ASC;
 });
 
 router.get("/fetchdropdownsdata", async (req, res) => {
-  console.log("Api Req Made to testController Route");
+  console.log("Api Req Made to fetchdropdownsdata Route");
+  res.status(200).json({
+        age_group_results: {
+          rows: ageGroupDropdown
+        },
+        sports_result: {
+          rows: sportsDropdown
+        }
+});
+});
+
+router.get("/daysContent", async (req, res) => {
+  console.log("Request made to postgres, daysContent Controller")
   try {
-    const query1 = `
-        SELECT age_group_label FROM age_group;
-        `;
-    const query2 = `
-        SELECT sport_name FROM sport;
-        `;
-    const result1 = await pool.query(query1);
-    const result2 = await pool.query(query2);
-    if (result1.rows.length > 0 && result2.rows.length > 0) {
-      res.status(200).json({
-        age_group_results: result1,
-        sports_result: result2,
-      });
+    const query = "SELECT * from day_content ORDER BY day ASC"
+    const result = await pool.query(query);
+    if (result.rows.length > 0) {
+      res.status(200).json(result.rows);
     } else {
       res.status(404).json({ message: "No Data Found" });
     }
   } catch (error) {
-    console.log("Error in fetchcategories API", error);
+    console.log("Error in daysContent API", error);
     res.status(500).send("Server Error");
   }
-});
+})
 
 export default router;

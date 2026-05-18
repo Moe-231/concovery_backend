@@ -3,7 +3,6 @@ export const allowedSports = new Set([
   "Air sports",
   "Australian Rules Football",
   "Basketball",
-  "Boating sports",
   "Combative sports",
   "Cricket",
   "Cycling",
@@ -46,3 +45,38 @@ export const allowedAgeGroups = new Set([
   "65+",
   "All ages"
 ]);
+
+export const sportsDropdown = [
+  { sport_name: "Australian Rules Football" },
+  { sport_name: "Basketball" },
+  { sport_name: "Combative sports" },
+  { sport_name: "Cricket" },
+  { sport_name: "Cycling" },
+  { sport_name: "Equestrian activities" },
+  { sport_name: "Gymnastics" },
+  { sport_name: "Hockey" },
+  { sport_name: "Ice and snow sports" },
+  { sport_name: "Racquet sports" },
+  { sport_name: "Recreational walking" },
+  { sport_name: "Roller sports" },
+  { sport_name: "Rugby" },
+  { sport_name: "Soccer" },
+  { sport_name: "Swimming and diving" },
+  { sport_name: "Touch football" },
+  { sport_name: "Water skiing" },
+  { sport_name: "Wheeled motor sports" },
+  { sport_name: "Other team bat or stick sports" },
+  { sport_name: "Other & unspecified football" },
+  { sport_name: "Other and unspecified sport activity" },
+  { sport_name: "All sports" }
+];
+
+export const ageGroupDropdown = [
+  { age_group_label: "0-4" },
+  { age_group_label: "5-14" },
+  { age_group_label: "15-24" },
+  { age_group_label: "25-44" },
+  { age_group_label: "45-64" },
+  { age_group_label: "65+" },
+  { age_group_label: "All ages" }
+];
